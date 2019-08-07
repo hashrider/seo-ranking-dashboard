@@ -21,6 +21,9 @@
                   <table id="datatables" class="table table-striped table-no-bordered table-hover" style="display:none">
                     <thead class="text-primary">
                       <th>
+                        {{ __('Name') }}
+                      </th>
+                      <th>
                         {{ __('User') }}
                       </th>
                       <th>
@@ -41,6 +44,9 @@
                     <tbody>
                       @foreach($projects as $project)
                         <tr>
+                          <td>
+                            {{ $project->name }}
+                          </td>
                           <td>
                             {{ $project->user->name }}
                           </td>

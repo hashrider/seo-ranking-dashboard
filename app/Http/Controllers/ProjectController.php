@@ -32,46 +32,6 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        // try {
-        //     //Instead of 'login' and 'password' use your credentials from https://my.dataforseo.com/login
-        //     $client = new RestClient('https://api.dataforseo.com/', null, 'jbelland@galtwaymarketing.com', 'ngeNnYuOVg0z4lpr');
-        // } catch (RestClientException $e) {
-        //     echo "\n";
-        //     print "HTTP code: {$e->getHttpCode()}\n";
-        //     print "Error code: {$e->getCode()}\n";
-        //     print "Message: {$e->getMessage()}\n";
-        //     print  $e->getTraceAsString();
-        //     echo "\n";
-        //     exit();
-        // }
-
-        // $post_array = array();
-        // $post_array["01"] = array( 
-        //     "domain" => "ranksonic.com",
-        //     "country_code" => "us",
-        //     "language" => "en",
-        //     "sort_by" => "relevance",
-        //     "pingback_url" => 'https://your-server.com/your_pingback_url.php?task_id=$task_id&post_id=$post_id'
-        // );
-
-        // if (count($post_array) > 0) {
-        //     try {
-        //         $task_post_result = $client->post('/v2/kwrd_for_domain_tasks_post', array('data' => $post_array));
-        //         print_r($task_post_result);
-
-        //         //do something with post results
-
-        //     } catch (RestClientException $e) {
-        //         echo "\n";
-        //         print "HTTP code: {$e->getHttpCode()}\n";
-        //         print "Error code: {$e->getCode()}\n";
-        //         print "Message: {$e->getMessage()}\n";
-        //         print  $e->getTraceAsString();
-        //         echo "\n";
-        //     }
-        // }
-
-        // $client = null;
         return view('projects.create');
     }
 
@@ -146,5 +106,40 @@ class ProjectController extends Controller
         $item->delete();
 
         return redirect()->route('item.index')->withStatus(__('Item successfully deleted.'));
+    }
+
+    public function getKeywords($domain) {
+        try {
+            $client = new RestClient('https://api.dataforseo.com/', null, 'jbelland@galtwaymarketing.com', 'ngeNnYuOVg0z4lpr');
+        } catch (RestClientException $e) {
+            echo "\n";
+            print "HTTP code: {$e->getHttpCode()}\n";
+            print "Error code: {$e->getCode()}\n";
+            print "Message: {$e->getMessage()}\n";
+            print  $e->getTraceAsString();
+            echo "\n";
+            exit();
+        }
+
+        $keywords = [];
+        //for domain
+        try {
+            $kw_get_result = $client->get("v2/kwrd_for_domain/{$domain}/us/en");
+            
+            foreach ($kw_get_result['results'] as $key => $value) {
+                $keywords[] = $value['key'];
+            }
+        } catch (RestClientException $e) {
+            echo "\n";
+            print "HTTP code: {$e->getHttpCode()}\n";
+            print "Error code: {$e->getCode()}\n";
+            print "Message: {$e->getMessage()}\n";
+            print  $e->getTraceAsString();
+            echo "\n";
+            exit();
+        }
+
+        $client = null;
+        return json_encode($keywords);
     }
 }

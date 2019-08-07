@@ -42,8 +42,18 @@
           <div class="card-body">
             <div class="tab-content">
               <div class="tab-pane show active" id="domain">
-                <h5 class="info-text"> Let's start with the domain (with validation)</h5>
+                <h5 class="info-text"> Let's start with the basic info (with validation)</h5>
                 <div class="row justify-content-center mt-5">
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">
+                          <i class="tim-icons icon-app"></i>
+                        </div>
+                      </div>
+                      <input type="text" required name="name" class="form-control" placeholder="Project Name...">
+                    </div>
+                  </div>
                   <div class="col-sm-10">
                     <div class="input-group">
                       <div class="input-group-prepend">
@@ -60,28 +70,7 @@
                 <h5 class="info-text">Select keywords to track</h5>
                 <div class="row justify-content-center">
                   <label class="col-sm-2 col-form-label">Suggested keywords</label>
-                  <div class="col-lg-10 checkbox-radios">
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox">
-                        <span class="form-check-sign"></span>
-                        seo
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox">
-                        <span class="form-check-sign"></span>
-                        seo checker
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox">
-                        <span class="form-check-sign"></span>
-                        seo tool
-                      </label>
-                    </div>
+                  <div class="col-lg-10 checkbox-radios suggested-keywords grid-container">
                   </div>
                 </div>
               </div>

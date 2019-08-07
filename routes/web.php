@@ -32,7 +32,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('item', 'ItemController', ['except' => ['show']]);
     Route::resource('role', 'RoleController', ['except' => ['show', 'destroy']]);
     Route::resource('user', 'UserController', ['except' => ['show']]);
-    Route::resource('project', 'ProjectController', ['except' => ['show']]);
+    Route::resource('project', 'ProjectController');
+    Route::get('keywords-for-domain/{domain}', ['as' => 'keywords_for_domain', 'uses' => 'ProjectController@getKeywords']);
     
     Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
     Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);

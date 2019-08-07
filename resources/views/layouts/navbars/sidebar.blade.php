@@ -4,6 +4,7 @@
     <i class="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted"></i>
   </button>
 </div>
+<div class="spinner-container"><div class="spinner"><div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div></div>
 <div class="sidebar" data="orange">
   <!--
     Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"

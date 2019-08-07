@@ -1246,11 +1246,31 @@ demo = {
       'nextSelector': '.btn-next',
       'previousSelector': '.btn-previous',
 
-      onNext: function(tab, navigation, index) {console.log(tab, navigation, index)
+      onNext: function(tab, navigation, index) {
         var $valid = $('.card-wizard form').valid();
         if (!$valid) {
           $validator.focusInvalid();
           return false;
+        }
+        if(index == 1) {
+          $('.spinner-container').show();
+          const result = $.ajax({
+            url: '/keywords-for-domain/' + $('[name=domain]').val(),
+            method: 'GET'
+          })
+          .done(function(response) {
+            $('.spinner-container').hide();
+            const keywords = JSON.parse(response)
+            keywords.forEach(function(kwd) {
+              $('.suggested-keywords').append(`<div class="form-check grid-item">\
+                      <label class="form-check-label">\
+                        <input class="form-check-input" type="checkbox">\
+                        <span class="form-check-sign"></span>\
+                        ${kwd}\
+                      </label>\
+                    </div>`);
+            })
+          });
         }
       },
 
