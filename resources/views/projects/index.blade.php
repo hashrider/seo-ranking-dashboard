@@ -33,9 +33,12 @@
                         {{ __('Keywords') }}
                       </th>
                       <th>
+                        {{ __('Competitors') }}
+                      </th>
+                      <th>
                         {{ __('Creation date') }}
                       </th>
-                      @can('manage-items', App\User::class)
+                      @can('manage-projects', App\User::class)
                         <th class="text-right">
                           {{ __('Actions') }}
                         </th>
@@ -55,6 +58,9 @@
                           </td>
                           <td>
                             {{ $project->keywords }}
+                          </td>
+                          <td>
+                            {{ $project->competitor }}
                           </td>
                           <td>
                             {{ $project->created_at->format('Y-m-d') }}

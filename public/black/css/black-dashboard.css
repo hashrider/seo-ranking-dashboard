@@ -29676,7 +29676,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .spinner-container {
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0,0,0,0.75);
@@ -29685,7 +29685,7 @@ Copyright (c) 2015 Daniel Eden
 }
 
 .spinner {
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -29776,10 +29776,4 @@ Copyright (c) 2015 Daniel Eden
   }
 }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: auto auto;
-}
-.grid-item {
-}
 /*# sourceMappingURL=dashboard-pro.css.map */

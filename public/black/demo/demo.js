@@ -1254,22 +1254,77 @@ demo = {
         }
         if(index == 1) {
           $('.spinner-container').show();
-          const result = $.ajax({
+          $.ajax({
             url: '/keywords-for-domain/' + $('[name=domain]').val(),
             method: 'GET'
           })
           .done(function(response) {
+            const result = JSON.parse(response);
+            let newrows = '';
+            window.keywords = result['keywords'];
+            for(i = 0; i < 25 || i < window.keywords.length; i++) {
+              const kwd = result['keywords'][i];
+              if(result['related_keywords'][kwd]) {
+                const { cpc, competition, search_volume } = result['related_keywords'][kwd];
+                newrows += `
+                <tr>
+                  <td class="text-center">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox">
+                        <span class="form-check-sign"></span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="keyword">${kwd}</span>
+                  </td>
+                  <td class="text-center">
+                    ${cpc}
+                  </td>
+                  <td class="text-center">
+                    ${competition}
+                  </td>
+                  <td class="text-center">
+                    ${search_volume}
+                  </td>
+                </tr>`;
+              }
+            }
+
+            $(newrows).insertBefore('.load-more');
             $('.spinner-container').hide();
-            const keywords = JSON.parse(response)
-            keywords.forEach(function(kwd) {
-              $('.suggested-keywords').append(`<div class="form-check grid-item">\
-                      <label class="form-check-label">\
-                        <input class="form-check-input" type="checkbox">\
-                        <span class="form-check-sign"></span>\
-                        ${kwd}\
-                      </label>\
-                    </div>`);
-            })
+          });
+        } 
+        else if(index == 2) {
+          $('.spinner-container').show();
+          $.ajax({
+            url: '/competitors-for-domain/' + $('[name=domain]').val(),
+            method: 'GET'
+          })
+          .done(function(response) {
+            const result = JSON.parse(response);
+            let newrows = '';
+            for(competitor in result) {
+              const info = result[competitor];
+              newrows += `
+                <tr>
+                  <td class="text-center">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox">
+                        <span class="form-check-sign"></span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="competitor">${competitor}</span>
+                  </td>
+                </tr>`;
+            }
+
+            $('.suggested-competitors').append(newrows);
+            $('.spinner-container').hide();
           });
         }
       },

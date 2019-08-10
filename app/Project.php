@@ -14,7 +14,7 @@ class Project extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'domain', 'keywords'
+        'name', 'user_id', 'domain', 'competitor', 'keywords'
     ];
 
     /**
